@@ -1,0 +1,37 @@
+<ion-modal-view>
+	<ion-header-bar>
+		<h1 class="title">Create New User</h1>
+		<div class="buttons">
+			<button class="button button-clear" ng-click="closeCreate()">Close</button>
+		</div>
+	</ion-header-bar>
+	<ion-content>
+		<form ng-submit="doCreate()">
+			<div class="list">
+				<label class="item item-input">
+					<span class="input-label">First Name</span>
+					<input type="text" ng-model="userData.firstname">
+				</label>
+				<label class="item item-input">
+					<span class="input-label">Lastname</span>
+					<input type="text" ng-model="userData.lastname">
+				</label>
+				<label class="item item-input">
+					<span class="input-label">Email</span>
+					<input type="text" ng-model="userData.email">
+				</label>
+				<label class="item item-input">
+					<span class="input-label">Username/Mobile</span>
+					<input type="text" ng-model="userData.username">
+				</label>
+				<label class="item item-input">
+					<span class="input-label">Password</span>
+					<input type="text" ng-model="userData.password">
+				</label>
+				<div class="col col-80 col-offset-10">
+					<button class="button button-block button-positive" type="submit">Create</button>
+				</div>
+			</div>
+		</form>
+	</ion-content>
+</ion-modal-view>
