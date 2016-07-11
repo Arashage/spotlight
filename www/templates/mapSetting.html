@@ -1,0 +1,61 @@
+<ion-modal-view>
+	<ion-header-bar>
+		<div class="title">
+			<i class="icon ion-chevron-left" ng-click="back()"></i>
+			Map Settings
+		</div>
+	</ion-header-bar>
+	<ion-content>
+		<form ng-submit="doCreate()">
+			<div class="list">
+
+				<label class="item item-input item-select">
+					<div class="input-label">
+						Night Mode
+					</div>
+					<select>
+						<option>On</option>
+						<option selected>Off</option>
+						<option>Auto</option>
+					</select>
+				</label>
+				<label class="item item-input item-select">
+					<div class="input-label">
+						Map Update
+					</div>
+					<select>
+						<option selected>Only over Wi-Fi</option>
+						<option>Automatic</option>
+					</select>
+				</label>
+				<li class="item item-toggle">
+					3D Mode
+					<label class="toggle toggle-calm">
+					 	<input type="checkbox">
+					 	<div class="track">
+					 		<div class="handle"></div>
+					 	</div>
+					</label>
+				</li>
+				<li class="item item-toggle">
+					Autozoom
+					<label class="toggle toggle-calm">
+					 	<input type="checkbox">
+					 	<div class="track">
+					 		<div class="handle"></div>
+					 	</div>
+					</label>
+				</li>
+				<li class="item item-toggle">
+					North is always up
+					<label class="toggle toggle-calm">
+					 	<input type="checkbox">
+					 	<div class="track">
+					 		<div class="handle"></div>
+					 	</div>
+					</label>
+				</li>
+			</div>
+		</form>
+	</ion-content>
+</ion-modal-view>

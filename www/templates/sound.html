@@ -1,0 +1,60 @@
+<ion-modal-view>
+	<ion-header-bar>
+		<div class="title">
+			<i class="icon ion-chevron-left" ng-click="back()"></i>
+			Sound
+		</div>
+	</ion-header-bar>
+	<ion-content>
+		<form ng-submit="doCreate()">
+			<div class="list">
+
+				<label class="item item-input item-select">
+					<div class="input-label">
+						Language
+					</div>
+					<select>
+						<option selected>English</option>
+						<option>Thai</option>
+					</select>
+				</label>
+				<label class="item item-input item-select">
+					<div class="input-label">
+						Alert Type
+					</div>
+					<select>
+						<option selected>Voice Waring</option>
+						<option>Audio Waring</option>
+						<option>None</option>
+					</select>
+				</label>
+				<li class="item item-toggle">
+					Voice Guidance
+					<label class="toggle toggle-calm">
+					 	<input type="checkbox">
+					 	<div class="track">
+					 		<div class="handle"></div>
+					 	</div>
+					</label>
+				</li>
+				<li class="item item-toggle">
+					Voice Activation
+					<label class="toggle toggle-calm">
+					 	<input type="checkbox">
+					 	<div class="track">
+					 		<div class="handle"></div>
+					 	</div>
+					</label>
+				</li>
+				<label class="item item-input item-select">
+					<div class="input-label">
+						Speark
+					</div>
+					<select>
+						<option selected>Kate</option>
+					</select>
+				</label>
+			</div>
+		</form>
+	</ion-content>
+</ion-modal-view>
