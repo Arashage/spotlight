@@ -70,7 +70,7 @@ angular.module('controller', [])
 				template: "Sigin successfully"
 			});
 			console.log("Authenticated successfully with payload-", authData);
-			$state.go('map');
+			$state.go('tab.map');
 		}).catch(function (error) {
 			alertPopup = $ionicPopup.alert({
 				title: 'Login Result',
@@ -94,7 +94,7 @@ angular.module('controller', [])
 				title: 'Login Result',
 				template: "Sigin successfully"
 			});
-			$state.go('map');
+			$state.go('tab.map');
 		}).catch(function(error) {
 			alertPopup = $ionicPopup.alert({
 				title: 'Login Result',
@@ -114,6 +114,17 @@ angular.module('controller', [])
 	$scope.map;
 	$scope.place = {};
 
+	var pos;
+
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(position) {
+			pos = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			};
+		});
+	};
+
 	var mapOptions = {
 		center: {lat: 44.540, lng: -78.546},
 		zoom: 15,
@@ -121,91 +132,83 @@ angular.module('controller', [])
 	};
 
 	var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-	var infoWindow = new google.maps.InfoWindow({map: map});
 	var marker = new google.maps.Marker({
 		position: {lat: 44.540, lng: -78.546},
 		map: map,
 		title: 'You are here.'
 	});
 
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(function(position) {
-			var pos = {
-				lat: position.coords.latitude,
-				lng: position.coords.longitude
-			};
+	var directionsService = new google.maps.DirectionsService;
+	var directionsDisplay = new google.maps.DirectionsRenderer;
+    directionsDisplay.setMap(map);
 
-			infoWindow.setPosition(pos);
-			marker.setPosition(pos);
-			map.setCenter(pos);
-		}, function() {
-			handleLocationError(true, infoWindow, map.getCenter());
-		});
-	} else {
-		// Browser doesn't support Geolocation
-		handleLocationError(false, infoWindow, map.getCenter());
-	};
+    var origin = document.getElementById("origin");
+    var destination = document.getElementById("destination");
 
+	
 
-	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-		infoWindow.setPosition(pos);
-		infoWindow.setContent(browserHasGeolocation ?
-			'Error: The Geolocation service failed.' :
-			'Error: Your browser doesn\'t support geolocation.');
-	};
+	var originAutocomplete = new google.maps.places.Autocomplete(origin);
+	originAutocomplete.bindTo('bounds', map);
 
-	var start = $scope.place.start;
-	console.log("start: " + start);
+	var destinationAutocomplete = new google.maps.places.Autocomplete(destination);
+	destinationAutocomplete.bindTo('bounds', map);
 
-	var autocomplete = new google.maps.places.Autocomplete(document.getElementById("map"));
-	autocomplete.bindTo('bounds', map);
-
-	autocomplete.addListener('place_changed', function() {
-
-		console.log("start: " + $scope.place.start);
-		infoWindow.close();
-		marker.setVisible(false);
-		var place = autocomplete.getPlace();
-
-		console.log("AutoCOmple Place: " + place);
+	originAutocomplete.addListener('place_changed', function() {
 		
+		var place = originAutocomplete.getPlace();
 		if (!place.geometry) {
 			window.alert("Autocomplete's returned place contains no geometry");
 			return;
 		}
+		expandViewportToFitPlace(map, place);
 
-		// If the place has a geometry, then present it on a map.
+		// If the place has a geometry, store its place ID and route if we have
+		// the other place ID
+		origin_place_id = place.place_id;
+		route(origin_place_id, destination_place_id, google.maps.TravelMode.DRIVING, directionsService, directionsDisplay);
+	});
+
+	destinationAutocomplete.addListener('place_changed', function() {
+		
+		var place = destinationAutocomplete.getPlace();
+		if (!place.geometry) {
+			window.alert("Autocomplete's returned place contains no geometry");
+			return;
+		}
+		expandViewportToFitPlace(map, place);
+
+		// If the place has a geometry, store its place ID and route if we have
+		// the other place ID
+		destination_place_id = place.place_id;
+		route(origin_place_id, destination_place_id, google.maps.TravelMode.DRIVING, directionsService, directionsDisplay);
+	});
+
+	function expandViewportToFitPlace(map, place) {
 		if (place.geometry.viewport) {
 			map.fitBounds(place.geometry.viewport);
 		} else {
 			map.setCenter(place.geometry.location);
-			map.setZoom(17);  // Why 17? Because it looks good.
+			map.setZoom(17);
 		}
+	}
 
-		marker.setIcon(/** @type {google.maps.Icon} */({
-			url: place.icon,
-			size: new google.maps.Size(71, 71),
-			origin: new google.maps.Point(0, 0),
-			anchor: new google.maps.Point(17, 34),
-			scaledSize: new google.maps.Size(35, 35)
-		}));
-
-		marker.setPosition(place.geometry.location);
-		marker.setVisible(true);
-
-		var address = '';
-		if (place.address_components) {
-			address = [
-				(place.address_components[0] && place.address_components[0].short_name || ''),
-				(place.address_components[1] && place.address_components[1].short_name || ''),
-				(place.address_components[2] && place.address_components[2].short_name || '')
-			].join(' ');
+	function route(origin_place_id, destination_place_id, travel_mode, directionsService, directionsDisplay) {
+		if (!origin_place_id || !destination_place_id) {
+			return;
 		}
-
-		infoWindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-		infoWindow.open(map, marker);
-
-	});
+		
+		directionsService.route({
+			origin: {'placeId': origin_place_id},
+			destination: {'placeId': destination_place_id},
+			travelMode: travel_mode
+		}, function(response, status) {
+			if (status === google.maps.DirectionsStatus.OK) {
+				directionsDisplay.setDirections(response);
+			} else {
+				window.alert('Directions request failed due to ' + status);
+			}
+		});
+	}
 
 	$scope.map = map;
 
@@ -259,7 +262,7 @@ angular.module('controller', [])
 
 	$scope.signout =function() {
 		firebase.auth().signOut().then(function() {
-			$state.go('profile');
+			$state.go('tab.profile');
 		}, function(error) {
 			// An error happened.
 		});

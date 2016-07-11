@@ -12,7 +12,9 @@ angular.module('spotlight', ['ionic', 'firebase', 'controller', 'service'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+  $ionicConfigProvider.tabs.position('bottom');
 
   var config = {
     apiKey: "AIzaSyCyNSzp_bfCDJARRRLuEVxBUsp569bvyXc",
@@ -23,36 +25,62 @@ angular.module('spotlight', ['ionic', 'firebase', 'controller', 'service'])
   firebase.initializeApp(config);
 
   $stateProvider
-  .state('profile', {
-    url: '/',
-    templateUrl: 'templates/profile.html',
-    controller: 'ProfileCtrl'
+  .state('tab', {
+    url: '/tab',
+    abstract: true,
+    templateUrl: 'templates/tabs.html'
   })
 
-  .state('map', {
-    url: '/',
-    templateUrl: 'templates/map.html',
-    controller: 'MapCtrl'
-/*  })
-
-  .state('search', {
-    url: '/',
-    templateUrl: 'templates/search.html',
-    controller: 'SearchCtrl'
+  .state('tab.profile', {
+    url: '/profile',
+    views: {
+      'profile': {
+        templateUrl: 'templates/profile.html',
+        controller: 'ProfileCtrl'
+      }
+    }
   })
 
-  .state('favorite', {
-    url: '/',
-    templateUrl: 'templates/favorite.html',
-    controller: 'FavoriteCtrl'
+  .state('tab.map', {
+    url: '/map',
+    views: {
+      'map': {
+        templateUrl: 'templates/map.html',
+        controller: 'MapCtrl'
+      }
+    }
   })
 
-  .state('setting', {
-    url: '/',
-    templateUrl: 'templates/setting.html',
-    controller: 'SettingCtrl'*/
+  .state('tab.search', {
+    url: '/search',
+    views: {
+      'search': {
+        templateUrl: 'templates/search.html',
+        controller: 'SearchCtrl'
+      }
+    }
+  })
+
+  .state('tab.favorite', {
+    url: '/favorite',
+    views: {
+      'favorite': {
+        templateUrl: 'templates/favorite.html',
+        controller: 'FavoriteCtrl'
+      }
+    }
+  })
+
+  .state('tab.setting', {
+    url: '/setting',
+    views: {
+      'setting': {
+        templateUrl: 'templates/setting.html',
+        controller: 'SettingCtrl'
+      }
+    }
   });
 
-  $urlRouterProvider.otherwise("/");
+  $urlRouterProvider.otherwise("/tab/profile");
 
 });

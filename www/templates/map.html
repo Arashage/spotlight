@@ -1,19 +1,18 @@
 <ion-view>
 	<ion-content>
-		<div id="panel">
-			<div class="item-input-inset">
-				<label class="item-input-wrapper">
-					<i class="icon ion-search placeholder-icon"></i>
-					<input id="start" type="search" placeholder="Set Start Location" ng-model="place.start" ng-change="onPlaceChange()">
-				</label>
-			</div>
-			<div class="item-input-inset">
-				<label class="item-input-wrapper">
-					<i class="icon ion-search placeholder-icon"></i>
-					<input type="search" placeholder="Set Destination Location" ng-model="place.destination" ng-change="onPlaceChange()">
-				</label>
-			</div>
-			<div id="map" data-tap-disabled="true"></div>
+		<div class="item-input-inset">
+			<label class="item-input-wrapper">
+				<i class="icon ion-search placeholder-icon"></i>
+				<input id="origin" type="search" placeholder="Set Start Location" ng-model="place.origin">
+			</label>
+		</div>
+		<div class="item-input-inset">
+			<label class="item-input-wrapper">
+				<i class="icon ion-search placeholder-icon"></i>
+				<input id="destination" type="search" placeholder="Set Destination Location" ng-model="place.destination">
+			</label>
+		</div>
+		<div id="map" data-tap-disabled="true"></div>
 		</div>
 	</ion-content>
 </ion-view>
