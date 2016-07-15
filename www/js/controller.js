@@ -216,9 +216,37 @@ angular.module('controller', [])
 
 .controller('FavoriteCtrl', function($scope) {
 
+
+
 })
 
-.controller('SettingCtrl', function($scope, $ionicModal, $ionicPopup, $state) {
+
+
+.controller('FavoriteMainCtrl', function($scope) {
+
+
+
+})
+
+.controller('FavoriteHistoryCtrl', function($scope) {
+
+
+
+})
+
+.controller('SearchMainCtrl', function($scope) {
+
+
+
+})
+
+.controller('SearchHistoryCtrl', function($scope) {
+
+
+
+})
+
+.controller('SettingCtrl', function($scope, $ionicModal, $ionicPopup, $sstate) {
 
 	$ionicModal.fromTemplateUrl('templates/sound.html', {
 		scope: $scope,

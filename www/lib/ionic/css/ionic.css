@@ -5132,8 +5132,9 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
 .tabs-icon-top.tabs .tab-item,
 .tabs-icon-bottom > .tabs .tab-item,
 .tabs-icon-bottom.tabs .tab-item {
-  font-size: 10px;
-  line-height: 14px; }
+  font-size: 20px;
+  line-height: 40px; 
+  font-weight: bold;}
 
 .tab-item .icon {
   display: block;

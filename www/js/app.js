@@ -55,7 +55,7 @@ angular.module('spotlight', ['ionic', 'firebase', 'controller', 'service'])
     url: '/search',
     views: {
       'search': {
-        templateUrl: 'templates/search.html',
+        templateUrl: 'templates/search/search.html',
         controller: 'SearchCtrl'
       }
     }
@@ -65,7 +65,7 @@ angular.module('spotlight', ['ionic', 'firebase', 'controller', 'service'])
     url: '/favorite',
     views: {
       'favorite': {
-        templateUrl: 'templates/favorite.html',
+        templateUrl: 'templates/favorite/favorite.html',
         controller: 'FavoriteCtrl'
       }
     }
@@ -79,7 +79,49 @@ angular.module('spotlight', ['ionic', 'firebase', 'controller', 'service'])
         controller: 'SettingCtrl'
       }
     }
-  });
+  })
+
+    .state('tab.favorite.main', {
+    url: '/main',
+    views: {
+      'favorite-main': {
+        templateUrl: 'templates/favorite/favorite-main.html',
+        controller: 'FavoriteMainCtrl'
+      }
+    }
+  })
+
+  .state('tab.favorite.history', {
+    url: '/history',
+    views: {
+      'favorite-history': {
+        templateUrl: 'templates/favorite/favorite-history.html',
+        controller: 'FavoriteHistoryCtrl'
+      }
+    }
+  })
+
+  .state('tab.search.main', {
+    url: '/main',
+    views: {
+      'search-main': {  
+        templateUrl: 'templates/search/search-main.html',
+        controller: 'SearchMainCtrl'
+      }
+    }
+  })
+
+    .state('tab.search.history', {
+    url: '/history',
+    views: {
+      'search-history': {  
+        templateUrl: 'templates/search/search-history.html',
+        controller: 'SearchHistoryCtrl'
+      }
+    }
+  })
+
+  ;
 
   $urlRouterProvider.otherwise("/tab/profile");
 
