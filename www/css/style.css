@@ -30,3 +30,9 @@ position:fixed;
     margin:auto;
     display:block;
 }
+
+.item-input-border-buttom{
+    border-bottom-style: solid;
+    border-width: thin;
+    border-color: ghostwhite;
+}

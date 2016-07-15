@@ -246,7 +246,7 @@ angular.module('controller', [])
 
 })
 
-.controller('SettingCtrl', function($scope, $ionicModal, $ionicPopup, $sstate) {
+.controller('SettingCtrl', function($scope, $ionicModal, $ionicPopup, $state) {
 
 	$ionicModal.fromTemplateUrl('templates/sound.html', {
 		scope: $scope,
