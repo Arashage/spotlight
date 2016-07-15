@@ -2,6 +2,10 @@ angular.module('controller', [])
 
 .controller('ProfileCtrl', function($scope, $ionicModal, $ionicPopup, $state) {
 	
+	 $scope.$on('$ionicView.afterEnter', function(){
+    document.getElementById("custom-overlay").style.display = "none";      
+  });  
+
 	$scope.loginData = {};
 	$scope.userData = {};
 	$scope.resetData = {};
