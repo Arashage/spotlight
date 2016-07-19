@@ -2,6 +2,12 @@ angular.module('controller', [])
 
 .controller('ProfileCtrl', function($scope, $ionicModal, $ionicPopup, $state) {
 	
+$scope.$on('$ionicView.afterEnter', function(){
+    setTimeout(function(){
+      document.getElementById("custom-overlay").style.display = "none";      
+    }, 3000);
+  });  
+
 	$scope.loginData = {};
 	$scope.userData = {};
 	$scope.resetData = {};
@@ -215,6 +221,34 @@ angular.module('controller', [])
 })
 
 .controller('FavoriteCtrl', function($scope) {
+
+
+
+})
+
+
+
+.controller('FavoriteMainCtrl', function($scope) {
+
+
+
+})
+
+.controller('FavoriteHistoryCtrl', function($scope) {
+
+
+
+})
+
+.controller('SearchMainCtrl', function($scope) {
+
+
+
+})
+
+.controller('SearchHistoryCtrl', function($scope) {
+
+
 
 })
 
