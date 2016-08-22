@@ -1,16 +1,31 @@
 <ion-view>
 	<ion-content>
-		<div class="item-input-inset">
+		<div id="origin" class="item-input-inset">
 			<label class="item-input-wrapper">
+				<input id="originTextBox" type="search" placeholder="Set Start Location" ng-model="place.origin">
 				<i class="icon ion-search placeholder-icon"></i>
-				<input id="origin" type="search" placeholder="Set Start Location" ng-model="place.origin">
 			</label>
 		</div>
-		<div class="item-input-inset">
+		<div id="destination" class="item-input-inset">
 			<label class="item-input-wrapper">
+				<input id="destinationTextBox" type="search" placeholder="Set Destination Location" ng-model="place.destination">
 				<i class="icon ion-search placeholder-icon"></i>
-				<input id="destination" type="search" placeholder="Set Destination Location" ng-model="place.destination">
 			</label>
+		</div>
+		<div id="travel" class="col-25" ng-click="search('meal_takeaway')">
+			<img class="circle" src="../../img/icon/icon-travel-blue.png" onmouseover="this.src='../../img/icon/icon-travel-white.png';" onmouseout="this.src='../../img/icon/icon-travel-blue.png';">
+		</div>
+		<div id="record" class="col-25" ng-click="search('meal_takeaway')">
+			<img class="circle" src="../../img/icon/icon-record-blue.png" onmouseover="this.src='../../img/icon/icon-record-white.png';" onmouseout="this.src='../../img/icon/icon-record-blue.png';">
+		</div>
+		<div id="plus" class="col-25" ng-click="search('meal_takeaway')">
+			<img class="circle" src="../../img/icon/icon-plus-acc-blue.png" onmouseover="this.src='../../img/icon/icon-plus-acc-white.png';" onmouseout="this.src='../../img/icon/icon-plus-acc-blue.png';">
+		</div>
+		<div id="gps" class="col-25" ng-click="search('meal_takeaway')">
+			<img class="circle" src="../../img/icon/icon-gps-blue.png" onmouseover="this.src='../../img/icon/icon-gps-white.png';" onmouseout="this.src='../../img/icon/icon-gps-blue.png';">
+		</div>
+		<div id="compass" class="col-25" ng-click="search('meal_takeaway')">
+			<img class="circle" src="../../img/icon/icon-compass-blue.png" onmouseover="this.src='../../img/icon/icon-compass-white.png';" onmouseout="this.src='../../img/icon/icon-compass-blue.png';">
 		</div>
 		<div id="map" data-tap-disabled="true"></div>
 		</div>

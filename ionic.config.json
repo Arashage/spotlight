@@ -1,0 +1,12 @@
+{
+  "name": "spotlight",
+  "app_id": "903297423126398",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}
